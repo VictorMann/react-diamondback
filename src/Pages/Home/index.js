@@ -1,25 +1,30 @@
 import { useSelector, useDispatch } from 'react-redux';
-import { setName, setAge } from '../../redux/reducers/userReducer';
+import { Link } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import Slider from 'react-slick';
 
 import * as C from './styles';
-
 import "slick-carousel/slick/slick.css";
 
-import Slider from 'react-slick';
-import { useEffect, useState } from 'react';
-
 import api from '../../Api';
+import { setCarr } from '../../redux/reducers/carrosselReducer';
 
 function Page() {
-  const user = useSelector(state => state.user);
   const dispatch = useDispatch();
+  const cat = useSelector(state => state.cat);
+  const carr = useSelector(state => state.carr);
   const [carrossel, setCarrossel] = useState([]);
+  const [vitrine, setVitrine] = useState([]);
   const [fakeCarrossel, setFakeCarrossel] = useState(true);
 
   useEffect(() => {
     const fn = async () => {
-      let data = await api.carrossel();
-      setCarrossel(data);
+      let data = [];
+      if (!carr.length) {
+        data = await api.carrossel();
+        dispatch(setCarr(data));
+      }
+      setCarrossel(carr);
       setFakeCarrossel(false);
     };
     fn();
@@ -34,6 +39,14 @@ function Page() {
     });
   }, [carrossel]);
 
+  useEffect(() => {
+    const fn = async () => {
+      let data = await api.vitrine();
+      setVitrine(data);
+    };
+    fn();
+  }, []);
+
   const settings = {
     className: "carrosel-main",
     dots: true,
@@ -42,10 +55,6 @@ function Page() {
     slidesToShow: 1,
     slidesToScroll: 1,
     autoplay: true
-  };
-
-  const handleNameInput = e => {
-    dispatch( setName(e.target.value) );
   };
 
   return (
@@ -62,16 +71,32 @@ function Page() {
       {fakeCarrossel &&
         <C.FakeCarrossel />
       }
+      {cat.list.length > 0 &&
+        <ul className='category-list'>
+          {cat.list.map(item => (
+            <li key={item.id}>
+              <Link to={`/${item.slug}`}>{item.nome}</Link>
+            </li>
+          ))}
+        </ul>
+      }
 
-      <h3>
-        {user.name} idade: {user.age}
-      </h3>
-      <div>
-        <input
-          type="text" 
-          value={user.name}
-          onChange={handleNameInput} />
-      </div>
+      {vitrine.length > 0 &&
+        <section className="ctn-h-p">
+          {vitrine.map(item => (
+            <figure key={item.slug} className="gprod">
+              <div className="ctn-img">
+                <Link to={`/p/${item.slug}`}>
+                    <img src={item.image} alt={item.titulo} />
+                </Link>
+              </div>
+              <figcaption>
+                <Link to={`/p/${item.slug}`}>{item.titulo}</Link>
+              </figcaption>
+            </figure>
+          ))}
+        </section>
+      }
 
     </C.Container>
   )

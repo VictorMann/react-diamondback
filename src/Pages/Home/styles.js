@@ -1,7 +1,12 @@
 import styled from "styled-components";
 
 export const Container = styled.div`
-
+img {
+  max-width: 100%;
+}
+.carrosel-main {
+  overflow: hidden;
+}
 .carrosel-main:hover .slick-arrow {
   opacity: 1;
 }
@@ -70,6 +75,75 @@ export const Container = styled.div`
 }
 .slick-dots li.slick-active {
   background: #738696;
+}
+
+.category-list {
+  display: flex;
+  list-type: none;
+  padding: 0;
+  margin: 0 auto;
+  // max-width: 1200px;
+  
+  li { 
+    display: flex;
+    flex: 1;
+    margin: .5em;
+    margin-left: 0;
+
+    &:first-child {
+      margin-left: .5em;
+    }
+    
+    a {
+      text-transform: uppercase;
+      text-decoration: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex: 1;
+      font-family: 'Fjalla One', sans-serif;
+      color: #738696;
+      background: #2a2f33;
+      font-size: 2em;
+      padding: 1.2em 0;
+      transition: color .2s ease-in-out;
+
+      &:hover {
+        color: #ee4624;
+      }
+    }
+  }
+}
+
+.ctn-h-p {
+  display: flex;
+  flex-wrap: wrap;
+  background: #DDD;
+  padding-bottom: 5px;
+}
+.gprod {
+  position: relative;
+  width: calc(33.33333% - 5px);
+  margin-left: 5px;
+  margin-top: 5px;
+  background: white;
+  font: 700 1.2em 'Mada', sans-serif;
+  color: #333;
+  text-align: center;
+}
+.gprod a {
+  color: inherit;
+  text-transform: uppercase;
+}
+
+.ctn-img {
+  padding: 20px;
+  padding-bottom: 3em;
+}
+.gprod figcaption {
+  position: absolute;
+  width: 100%;
+  bottom: .5em;
 }
 `;
 

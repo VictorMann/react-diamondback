@@ -1,7 +1,9 @@
 import { combineReducers } from "redux";
 
-import user from "./userReducer";
+import cat from "./categoryReducer";
+import carr from "./carrosselReducer";
 
 export default combineReducers({
-  user
+  cat,
+  carr
 });

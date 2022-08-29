@@ -52,7 +52,7 @@ a {
     border-bottom-right-radius: 10px;
     overflow: hidden;
     font-size: .94em;
-    z-index: 1;
+    z-index: 100;
 
     a {
       width: 9.5em;

@@ -1,15 +1,20 @@
+import { useDispatch } from 'react-redux';
+import { setListCategories } from '../../redux/reducers/categoryReducer';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import * as C from './styles';
 import { AreaLimit } from '../Template/styles';
 
 import api from '../../Api';
+import { dataType } from '../../Helpers';
 
 function Menu() {
+  const dispatch = useDispatch();
   const [categories, setCategories] = useState([]);
   useEffect(() => {
     const fn = async () => {
       let cats = await api.categories();
+      dispatch(setListCategories(cats));
       setCategories(cats);
     };
     fn();
