@@ -12,7 +12,7 @@ function Page({ children }) {
           <Link to="/" className='logo' title='Diamondback'>
             <img src="/assets/imgs/logo.png" alt="logo diamondback" />
           </Link>
-          <form className='form-search'>
+          <form className='form-search' action="/search" method="GET">
             <input type="text" name="s" placeholder="O que você procura?" />
             <button>
               <span className='glyphicon glyphicon-search'></span>

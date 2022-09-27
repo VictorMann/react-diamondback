@@ -1,13 +1,20 @@
-import { Link, useParams } from 'react-router-dom';
 import * as C from './styles';
+import { Link, useLocation } from 'react-router-dom';
+import { useQueryString } from '../../Helpers/Hooks';
 
 function Paginate({ currentPage, limit, pageTotalItens, setPage }) {
-  const { category } = useParams();
+  const location = useLocation();
+  const query = useQueryString();
   const pageAtual = (currentPage * limit) - limit + 1;
   const pageLimit = (currentPage * limit) > pageTotalItens ? pageTotalItens : (currentPage * limit);
   const totalPages = Math.ceil(pageTotalItens / limit);
 
   const handleClick = page => setPage(page);
+
+  const queryString = (page) => {
+    query.set('page', page);
+    return query.toString();
+  };
 
   return (
     pageTotalItens > 0
@@ -30,7 +37,7 @@ function Paginate({ currentPage, limit, pageTotalItens, setPage }) {
                 {currentPage !== 1
                 ?
                   <Link 
-                    to={`/${category}?page=${currentPage-1}`}
+                    to={`${location.pathname}?${queryString(currentPage-1)}`}
                     onClick={e => handleClick(currentPage-1)}>
                       «
                   </Link>
@@ -42,7 +49,7 @@ function Paginate({ currentPage, limit, pageTotalItens, setPage }) {
               {new Array(totalPages).fill(0).map((_,index) => (
                 <li key={index} className={currentPage === (index + 1) ? 'active':''}>
                   <Link 
-                    to={`/${category}?page=${index+1}`}
+                    to={`${location.pathname}?${queryString(index+1)}`}
                     onClick={e => handleClick(index+1)}>
                       {index + 1}
                     </Link>
@@ -53,7 +60,7 @@ function Paginate({ currentPage, limit, pageTotalItens, setPage }) {
                 {currentPage !== totalPages
                 ?
                   <Link 
-                    to={`/${category}?page=${currentPage+1}`}
+                    to={`${location.pathname}?${queryString(currentPage+1)}`}
                     onClick={e => handleClick(currentPage+1)}>
                       »
                     </Link>

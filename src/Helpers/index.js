@@ -35,6 +35,7 @@ export const isNumber = dado => {
 /**
  *  Cria Elemento React
  *  @param {String} tag div|h1|span|etc...
+ *  @param {Object} props {className: '', id: '', etc...}
  *  @param {String|Array} content conteúdo filho do elemento, caso seja passado um array a posição content[1] é default
  *  @param {Boolean} markup caso o conteúdo filho seja uma marção HTML Exp.: "<h1>Hello, World!</h1>"
  *  @return {React.createElement}

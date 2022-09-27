@@ -1,10 +1,11 @@
+import * as C from './styles';
+
 import React from 'react';
 import { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import FsLightbox from 'fslightbox-react';
-import * as C from './styles';
 
-import { TitlePage, AreaLimit } from '../../Components/Template/styles';
+import { AreaLimit } from '../../Components/Template/styles';
 
 import api from '../../Api';
 import { createElement } from '../../Helpers';
@@ -63,7 +64,7 @@ function Page() {
             </div>
             <div className="pr-title">
               {produto &&
-                <h1 className="title">{produto.titulo} [{+lightboxController.toggler}] <small className="cod">cod.: {produto.codigo}</small></h1>
+                <h1 className="title">{produto.titulo} <small className="cod">cod.: {produto.codigo}</small></h1>
               }
             </div>
           </div>

@@ -9,6 +9,7 @@ import Category from './Pages/Category';
 import Produto from './Pages/Produto';
 import EncontreUmaLoja from './Pages/EncontreUmaLoja';
 import EncontreUmaLojaUF from './Pages/EncontreUmaLojaUF';
+import Search from './Pages/Search';
 import NotFound from './Pages/NotFound';
 
 function Rotas() {
@@ -21,6 +22,7 @@ function Rotas() {
       <Route path='/contato' element={<Contato />} />
       <Route path='/encontre-uma-loja' element={<EncontreUmaLoja />} />
       <Route path='/encontre-uma-loja/:uf' element={<EncontreUmaLojaUF />} />
+      <Route path='/search' element={<Search />} />
       <Route path='/:category' element={<Category />} />
       <Route path='/p/:slug' element={<Produto />} />
       <Route path='*' element={<NotFound />} />
